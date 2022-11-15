@@ -1,0 +1,1054 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A choose-your-own-adventure workshop for Operations and Development teams on ARO.">
+      
+      
+        <meta name="author" content="Red Hat">
+      
+      
+        <link rel="canonical" href="https://ws.mobb.cloud/ops/day2/labels/">
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Labeling Nodes - ARO Workshop Atlanta</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.472b142f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.08040f6c.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Overpass:300,300i,400,400i,700,700i%7COverpass+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Overpass";--md-code-font:"Overpass Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ARO Workshop Atlanta" class="md-header__button md-logo" aria-label="ARO Workshop Atlanta" data-md-component="logo">
+      
+  <img src="../../../favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ARO Workshop Atlanta
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Labeling Nodes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rh-mobb/aro-hackathon-content" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rh-mobb/aro-hackathon-content
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ARO Workshop Atlanta" class="md-nav__button md-logo" aria-label="ARO Workshop Atlanta" data-md-component="logo">
+      
+  <img src="../../../favicon.ico" alt="logo">
+
+    </a>
+    ARO Workshop Atlanta
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rh-mobb/aro-hackathon-content" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rh-mobb/aro-hackathon-content
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../setup/environment/" class="md-nav__link">
+        Environment Setup
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../setup/access-cluster/" class="md-nav__link">
+        Access Your Cluster
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Day Two ARO Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day Two ARO Operations" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day Two ARO Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrades/" class="md-nav__link">
+        Managing Cluster Upgrades
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scaling-nodes/" class="md-nav__link">
+        Managing Worker Nodes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoscaling/" class="md-nav__link">
+        Cluster Autoscaling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Labeling Nodes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Labeling Nodes
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-a-label-for-the-machineset" class="md-nav__link">
+    Set a label for the MachineSet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-an-app-to-the-labeled-nodes" class="md-nav__link">
+    Deploy an app to the labeled nodes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Azure Service Operator (ASO)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Azure Service Operator (ASO)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Azure Service Operator (ASO)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aso/deploy/" class="md-nav__link">
+        Deploy the Azure Service Operator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aso/app/" class="md-nav__link">
+        Deploy an Azure Service using ASO
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Azure Front Door
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Azure Front Door" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Azure Front Door
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../afd/private-ingress/" class="md-nav__link">
+        Create a Private Ingress Controller
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../afd/configure/" class="md-nav__link">
+        Configure Azure Front Door
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Deploy and Expose an App
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Deploy and Expose an App" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Deploy and Expose an App
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../app/deploy/" class="md-nav__link">
+        Deploy the App
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../app/afd/" class="md-nav__link">
+        Expose the App with Front Door
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../app/cicd/" class="md-nav__link">
+        Automate Deploying the App
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../app/resilience/" class="md-nav__link">
+        Make an App Resilient
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Azure Arc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Azure Arc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Azure Arc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arc/integration/" class="md-nav__link">
+        Connect Azure Arc with ARO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arc/observability/" class="md-nav__link">
+        Enable Azure Arc Observability
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arc/key-vault/" class="md-nav__link">
+        Integrate Azure Key Vault
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Service Mesh
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Service Mesh" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Service Mesh
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../service-mesh/introduction/" class="md-nav__link">
+        Service Mesh
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../service-mesh/install/" class="md-nav__link">
+        Deploy Service Mesh Operator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../service-mesh/deploy-control-plane/" class="md-nav__link">
+        Deploy Control Plane
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../service-mesh/deploy-workload/" class="md-nav__link">
+        Deploy Workloads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../service-mesh/weighted-routing/" class="md-nav__link">
+        Deploy Weighted Load Balancing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../service-mesh/kiali/" class="md-nav__link">
+        Access Kiali Dashboard
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-a-label-for-the-machineset" class="md-nav__link">
+    Set a label for the MachineSet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-an-app-to-the-labeled-nodes" class="md-nav__link">
+    Deploy an app to the labeled nodes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/rh-mobb/aro-hackathon-content/edit/master/docs/ops/day2/labels.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Labeling Nodes</h1>
+
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">#</a></h2>
+<p>Labels are a useful way to select which nodes that an application will run on. These nodes are created by machines which are defined by the MachineSets we worked with in previous sections of this workshop. An example of this would be running a memory intensive application only on a specific node type.</p>
+<p>While you can directly add a label to a node, it is not recommended because nodes can be recreated, which would cause the label to disappear. Therefore we need to label the MachineSet itself. An important caveat to this process is that only <strong>new machines</strong> created by the MachineSet will get the label. This means you will need to either scale the MachineSet down to zero then back up to create new machines with the label, or you can label the existing machines directly.</p>
+<h2 id="set-a-label-for-the-machineset">Set a label for the MachineSet<a class="headerlink" href="#set-a-label-for-the-machineset" title="Permanent link">#</a></h2>
+<ol>
+<li>
+<p>Just like the last section, let's pick a MachineSet to add our label. To do so, run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">MACHINESET</span><span class="o">=</span><span class="k">$(</span>oc -n openshift-machine-api get machinesets -o name <span class="p">|</span> head -1<span class="k">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">echo</span> <span class="si">${</span><span class="nv">MACHINESET</span><span class="si">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>Now, let's patch the MachineSet with our new label. To do so, run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>oc -n openshift-machine-api patch <span class="si">${</span><span class="nv">MACHINESET</span><span class="si">}</span> --type<span class="o">=</span>merge -p <span class="s1">&#39;{&quot;spec&quot;:{&quot;template&quot;:{&quot;spec&quot;:{&quot;metadata&quot;:{&quot;labels&quot;:{&quot;tier&quot;:&quot;frontend&quot;}}}}}}&#39;</span>
+</code></pre></div>
+</li>
+<li>
+<p>As you'll remember, the existing machines won't get this label, but all new machines will. While we could just scale this MachineSet down to zero and back up again, that could disrupt our workloads. Instead, let's just loop through and add the label to all of our nodes in that MachineSet. To do so, run the following command: </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">MACHINES</span><span class="o">=</span><span class="k">$(</span>oc -n openshift-machine-api get machines -o name -l <span class="s2">&quot;machine.openshift.io/cluster-api-machineset=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$MACHINESET</span> <span class="p">|</span> cut -d / -f2 <span class="k">)</span><span class="s2">&quot;</span> <span class="p">|</span> xargs<span class="k">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>oc label -n openshift-machine-api <span class="si">${</span><span class="nv">MACHINES</span><span class="si">}</span> <span class="nv">tier</span><span class="o">=</span>frontend
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">NODES</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$MACHINES</span> <span class="p">|</span> sed <span class="s1">&#39;s/machine.machine.openshift.io/node/g&#39;</span><span class="k">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>oc label <span class="si">${</span><span class="nv">NODES</span><span class="si">}</span> <span class="nv">tier</span><span class="o">=</span>frontend
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Just like MachineSets, machines do not automatically label their existing child resources, this means we need to relabel them ourselves to avoid having to recreate them.</p>
+</div>
+</li>
+<li>
+<p>Now, let's verify the nodes are properly labeled. To do so, run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>oc get nodes --selector<span class="o">=</span><span class="s1">&#39;tier=frontend&#39;</span>
+</code></pre></div>
+<p>Your output will look something like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>NAME                                       STATUS   ROLES    AGE     VERSION
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>user1-cluster-8kvh4-worker-eastus1-hd5cw   Ready    worker   7h31m   v1.23.5+3afdacb
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>user1-cluster-8kvh4-worker-eastus1-zj7dl   Ready    worker   7h22m   v1.23.5+3afdacb
+</code></pre></div>
+<p>Pending that your output shows one or more node, this demonstrates that our MachineSet and associated nodes are properly annotated! </p>
+</li>
+</ol>
+<h2 id="deploy-an-app-to-the-labeled-nodes">Deploy an app to the labeled nodes<a class="headerlink" href="#deploy-an-app-to-the-labeled-nodes" title="Permanent link">#</a></h2>
+<p>Now that we've successfully labeled our nodes, let's deploy a workload to demonstrate app placement using <code>nodeSelector</code>. This should force our app to only our labeled nodes. </p>
+<ol>
+<li>
+<p>First, let's create a namespace (also known as a project in OpenShift). To do so, run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>oc new-project nodeselector-ex
+</code></pre></div>
+</li>
+<li>
+<p>Next, let's deploy our application and associated resources that will target our labeled nodes. To do so, run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>oc create -f https://ws.mobb.cloud/assets/node-select-deployment.yaml
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Wondering what we just created?</p>
+<p>This is the app deployment and associated resource definition that will target our labeled worker nodes.</p>
+</div>
+<div class="highlight"><span class="filename">node-select-deployment.yaml</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kind: Deployment
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>apiVersion: apps/v1
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>metadata:
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  name: nodeselector-app
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>  namespace: nodeselector-ex
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>spec:
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>  replicas: 1
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>  selector:
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    matchLabels:
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>      app: nodeselector-app
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>  template:
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    metadata:
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>      labels:
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        app: nodeselector-app
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    spec:
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>      nodeSelector:
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>        tier: frontend
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>      containers:
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>        - name: hello-openshift
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>          image: &quot;docker.io/openshift/hello-openshift&quot;
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>          ports:
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>            - containerPort: 8080
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>              protocol: TCP
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>            - containerPort: 8888
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>              protocol: TCP
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>---
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>apiVersion: v1
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>kind: Service
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>metadata:
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a>  name: nodeselector-app
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>  namespace: nodeselector-ex
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a>spec:
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>  ports:
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>  - port: 8080
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>    targetPort: 8080
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>  selector:
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a>    app: nodeselector-app
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>---
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>apiVersion: route.openshift.io/v1
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a>kind: Route
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a>metadata:
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a>  name: nodeselector-app
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a>  namespace: nodeselector-ex
+<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a>spec:
+<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a>  port:
+<a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a>    targetPort: 8080
+<a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a>  to:
+<a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a>    kind: Service
+<a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a>    name: nodeselector-app
+<a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a>    weight: 100
+<a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a>  tls:
+<a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a>    insecureEdgeTerminationPolicy: Redirect
+<a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a>    termination: edge
+<a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a>  wildcardPolicy: None
+</code></pre></div>
+</li>
+<li>
+<p>Now, let's validate that the application has been deployed to one of the labeled nodes. To do so, run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>oc -n nodeselector-ex get pod -l <span class="nv">app</span><span class="o">=</span>nodeselector-app -o wide
+</code></pre></div>
+<p>Your output will look something like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>NAME                                READY   STATUS    RESTARTS   AGE   IP            NODE                                       NOMINATED NODE   READINESS GATES
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>nodeselector-app-7746c49485-tbnmd   <span class="m">1</span>/1     Running   <span class="m">0</span>          74s   <span class="m">10</span>.131.2.73   user1-cluster-8kvh4-worker-eastus1-zj7dl   &lt;none&gt;           &lt;none&gt;
+</code></pre></div>
+<p>Verify that the app was scheduled on a node that matches the output from the previous section's step four. </p>
+</li>
+<li>
+<p>And finally, if you'd like to view the app in your browser, get the route of the application. To do so, run the following command:</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>oc -n nodeselector-ex get route nodeselector-app -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.spec.host}&#39;</span>
+</code></pre></div>
+<p>Then visit the URL presented in a new tab in your web browser (using HTTPS). For example, your output will look something similar to:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nodeselector-app-nodeselector-ex.apps.ce7l3kf6.eastus.aroapp.io
+</code></pre></div>
+<p>In that case, you'd visit <code>https://nodeselector-app-nodeselector-ex.apps.ce7l3kf6.eastus.aroapp.io</code> in your browser. </p>
+<p>Congratulations! You've successfully demonstrated the ability to label nodes and target those nodes using <code>nodeSelector</code>. </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../autoscaling/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Cluster Autoscaling" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Cluster Autoscaling
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../aso/deploy/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploy the Azure Service Operator" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Deploy the Azure Service Operator
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate"], "search": "../../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+    
+  </body>
+</html>
